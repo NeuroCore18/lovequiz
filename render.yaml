@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: love-quiz-demo
+    env: php
+    buildCommand: ./build.sh
+    startCommand: php -S 0.0.0.0:$PORT -t .
+    plan: free
+    autoDeploy: true
+    rootDir: .
+    envVars:
+      PHP_VERSION: 8.2
+
+preDeployScript: |
+  # Create collected folder with proper permissions
+  mkdir -p collected
+  chmod 777 collected
+
+staticSites:
+  - name: quiz-static
+    buildCommand: echo "No build needed"
+    staticPublishPath: .
+    routes:
+      - path: /
+        destination: quiz.html
