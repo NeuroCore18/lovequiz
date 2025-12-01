@@ -1,11 +1,9 @@
 services:
   - type: web
-    name: love-quiz-privacy-demo
-    env: php
-    buildCommand: exit 0   # no build needed
-    startCommand: php -S 0.0.0.0:$PORT
+    name: php-quiz-server
+    env: docker
     plan: free
-    autoDeploy: true
-    rootDir: .
+    dockerfilePath: ./Dockerfile
     envVars:
-      PHP_VERSION: 8.2
+      - key: PORT
+        value: 10000
